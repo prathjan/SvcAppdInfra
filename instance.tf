@@ -154,6 +154,19 @@ resource "null_resource" "vm_node_init" {
     }
   }
 
+  provisioner "file" {
+    source = "scripts/"
+    destination = "/tmp"
+    connection {
+      type = "ssh"
+      host = "${local.dbvmip}"
+      user = "root"
+      password = "${local.root_password}"
+      port = "22"
+      agent = false
+    }
+  }
+
   provisioner "remote-exec" {
     inline = [
         "chmod +x /tmp/grant.sh",
