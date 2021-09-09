@@ -20,6 +20,16 @@ data "terraform_remote_state" "dbvm" {
   }
 }
 
+# Configure the VMware vSphere Provider
+provider "vsphere" {
+  user           = local.vsphere_user
+  password       = local.vsphere_password
+  vsphere_server = local.vsphere_server
+
+  # If you have a self-signed cert
+  allow_unverified_ssl = true
+}
+
 variable "globalwsname" {
   type = string
 }
