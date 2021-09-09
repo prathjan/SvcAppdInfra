@@ -20,6 +20,14 @@ data "terraform_remote_state" "dbvm" {
   }
 }
 
+variable "globalwsname" {
+  type = string
+}
+
+variable "dbvmwsname" {
+  type = string
+}
+
 
 data "vsphere_datacenter" "dc" {
   name = local.datacenter
