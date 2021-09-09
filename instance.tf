@@ -157,7 +157,6 @@ output "vm_ip" {
 
 locals {
   dbvmip = data.terraform_remote_state.dbvm.outputs.vm_ip[0]
-  globalwsname = yamldecode(data.terraform_remote_state.global.outputs.globalwsname)
   vsphere_user = yamldecode(data.terraform_remote_state.global.outputs.vsphere_user)
   vsphere_password = yamldecode(data.terraform_remote_state.global.outputs.vsphere_password)
   vsphere_server = yamldecode(data.terraform_remote_state.global.outputs.vsphere_server)
