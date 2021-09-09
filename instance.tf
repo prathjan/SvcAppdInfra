@@ -143,8 +143,6 @@ resource "null_resource" "vm_node_init" {
         "/tmp/appd.sh",
 	"chmod +x /tmp/tom.sh",
         "/tmp/tom.sh",
-        "chmod +x /tmp/grant.sh",
-        "/tmp/grant.sh ${vsphere_virtual_machine.vm_deploy[count.index].default_ip_address} ${local.dbvmip} teadb teauser teapassword",
     ]
     connection {
       type = "ssh"
@@ -155,6 +153,22 @@ resource "null_resource" "vm_node_init" {
       agent = false
     }
   }
+
+  provisioner "remote-exec" {
+    inline = [
+        "chmod +x /tmp/grant.sh",
+        "/tmp/grant.sh ${vsphere_virtual_machine.vm_deploy[count.index].default_ip_address} ${local.dbvmip} teadb teauser teapassword",
+    ]
+    connection {
+      type = "ssh"
+      host = "${local.dbvmip}"
+      user = "root"
+      password = "${local.root_password}"
+      port = "22"
+      agent = false
+    }
+  }
+
 }
 
 output "vm_deploy" {
