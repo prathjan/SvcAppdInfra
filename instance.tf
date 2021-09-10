@@ -2,7 +2,7 @@
 data "terraform_remote_state" "global" {
   backend = "remote"
   config = {
-    organization = "Lab14"
+    organization = var.org 
     workspaces = {
       name = var.globalwsname
     }
@@ -30,6 +30,9 @@ provider "vsphere" {
   allow_unverified_ssl = true
 }
 
+variable "org" {
+  type = string
+}
 variable "globalwsname" {
   type = string
 }
